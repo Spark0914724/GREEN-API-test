@@ -96,6 +96,7 @@
       <div class="gap"></div>
 
       <button onclick="getSettings()">getSettings</button>
+      <button onclick="getStateInstance()">getStateInstance</button>
     </div>
 
     <!-- RIGHT: response -->
@@ -129,6 +130,14 @@
     const { id, token } = creds();
     try {
       const res = await fetch(`${BASE}/waInstance${id}/getSettings/${token}`);
+      show(await res.json());
+    } catch(e) { showErr(e); }
+  }  
+  
+  async function getStateInstance() {
+    const { id, token } = creds();
+    try {
+      const res = await fetch(`${BASE}/waInstance${id}/getStateInstance/${token}`);
       show(await res.json());
     } catch(e) { showErr(e); }
   }
