@@ -92,6 +92,10 @@
     <div class="left">
       <input type="text" id="idInstance" placeholder="idInstance" />
       <input type="text" id="apiToken" placeholder="ApiTokenInstance" />
+
+      <div class="gap"></div>
+
+      <button onclick="getSettings()">getSettings</button>
     </div>
 
     <!-- RIGHT: response -->
@@ -102,6 +106,33 @@
 
   </div>
 </div>
+
+<script>
+  const BASE = 'https://api.green-api.com';
+
+  function creds() {
+    return {
+      id: document.getElementById('idInstance').value.trim(),
+      token: document.getElementById('apiToken').value.trim()
+    };
+  }
+
+  function show(data) {
+    document.getElementById('response').value = JSON.stringify(data, null, 2);
+  }
+
+  function showErr(e) {
+    document.getElementById('response').value = 'Error: ' + e.message;
+  }
+
+  async function getSettings() {
+    const { id, token } = creds();
+    try {
+      const res = await fetch(`${BASE}/waInstance${id}/getSettings/${token}`);
+      show(await res.json());
+    } catch(e) { showErr(e); }
+  }
+</script>
 
 </body>
 </html>
