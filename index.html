@@ -119,6 +119,8 @@
       <div class="gap"></div>
 
       <input type="text" id="phoneFile" placeholder="77771234567" />
+      <input type="text" id="fileUrl" placeholder="https://my.site.com/img/horse.png" />
+      <button onclick="sendFileByUrl()">sendFileByUrl</button>
     </div>
 
     <!-- RIGHT: response -->
@@ -173,6 +175,21 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chatId: `${phone}@c.us`, message })
+      });
+      show(await res.json());
+    } catch(e) { showErr(e); }
+  }  
+  
+  async function sendFileByUrl() {
+    const { id, token } = creds();
+    const phone = document.getElementById('phoneFile').value.trim();
+    const url = document.getElementById('fileUrl').value.trim();
+    const fileName = url.split('/').pop() || 'file';
+    try {
+      const res = await fetch(`${BASE}/waInstance${id}/sendFileByUrl/${token}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chatId: `${phone}@c.us`, urlFile: url, fileName })
       });
       show(await res.json());
     } catch(e) { showErr(e); }
