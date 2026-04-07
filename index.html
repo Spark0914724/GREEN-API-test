@@ -55,6 +55,18 @@
 
     .left button:hover { background: #f0f0f0; }
 
+    .left textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      height: 80px;
+      resize: vertical;
+      outline: none;
+    }
+
     .gap { height: 16px; }
 
     /* RIGHT column */
@@ -101,6 +113,8 @@
       <div class="gap"></div>
 
       <input type="text" id="phoneMessage" placeholder="77771234567" />
+      <textarea id="messageText" placeholder="Hello World!"></textarea>
+      <button onclick="sendMessage()">sendMessage</button>
     </div>
 
     <!-- RIGHT: response -->
@@ -142,6 +156,20 @@
     const { id, token } = creds();
     try {
       const res = await fetch(`${BASE}/waInstance${id}/getStateInstance/${token}`);
+      show(await res.json());
+    } catch(e) { showErr(e); }
+  }  
+  
+  async function sendMessage() {
+    const { id, token } = creds();
+    const phone = document.getElementById('phoneMessage').value.trim();
+    const message = document.getElementById('messageText').value.trim();
+    try {
+      const res = await fetch(`${BASE}/waInstance${id}/sendMessage/${token}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chatId: `${phone}@c.us`, message })
+      });
       show(await res.json());
     } catch(e) { showErr(e); }
   }
