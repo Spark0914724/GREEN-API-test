@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GREEN-API Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 40px;
+    }
+
+    /* Two-column layout */
+    .layout {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    /* LEFT column */
+    .left {
+      width: 280px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .left input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .left button {
+      width: 100%;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #999;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .left button:hover { background: #f0f0f0; }
+
+    .gap { height: 16px; }
+
+    /* RIGHT column */
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .right label {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .right textarea {
+      width: 100%;
+      height: 460px;
+      padding: 10px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: monospace;
+      resize: none;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="layout">
+
+    <!-- LEFT: controls -->
+    <div class="left">
+      <input type="text" id="idInstance" placeholder="idInstance" />
+      <input type="text" id="apiToken" placeholder="ApiTokenInstance" />
+    </div>
+
+    <!-- RIGHT: response -->
+    <div class="right">
+      <label>Ответ:</label>
+      <textarea id="response" readonly></textarea>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
